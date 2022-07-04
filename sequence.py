@@ -83,3 +83,54 @@ print([id(i) for i in marks2]) #print: [4371816512, 4371816512, 4371816512, 4371
 #     for j in i:
 #         print(id(j), end=' ')
 #     print()
+
+
+# Tuple advanced
+# Unpacking
+
+# b, a = a, b
+print(divmod(100, 9))
+# ()로 묶인것은 1개이지 때문에 아스타 * 로 풀어서 넣어야 실행이 가능하다.
+print(divmod(*(100, 9)))
+# 결과 값 또한 tuple()이기 때문에 * (unpacking) 실행
+print(*(divmod(100, 9)))
+
+print()
+
+x, y, *rest = range(10)
+
+print(rest)
+
+# Mutable (가변) Immutable(불변)
+l = (15, 20, 25)
+m = [15, 20, 25]
+print(l, id(l))
+print(m, id(m))
+
+l = l * 2
+m = m * 2
+print(l, id(l)) # 아이디 재할당
+print(m, id(m))
+
+# sort vs sorted
+# reverse, key=Len, key=str.Loser, key=func
+
+# sorted: 정렬 후 새로운 객체 반환
+# sort : 정렬후, 객체 직접 반환
+
+f_list = ['orange', 'apple', 'mango', 'papaya', 'lemon']
+print('sorted -', sorted(f_list))
+print('sorted - ', sorted(f_list, reverse=True))
+print('sorted - ', sorted(f_list, key=len))
+print('sorted - ', sorted(f_list, key=lambda x: x[-1]))
+
+
+print(f_list)
+
+# sorted : 정렬 후 객체 직접 변경
+# 반환 값 확인(None)
+print('sort -', f_list.sort(), '원본 수정됨', f_list)
+
+# List vs Array 적합한 사용성 설명
+# 리스트 기반 : 융통성, 다양한 자료형, 범용적 사용
+# 숫자 기반: ai 기계학습, 고속연산, 배열(리스트와 거의 호환)
