@@ -161,9 +161,13 @@ new_dict2 = {}
 
 # no use Setdefault
 for k, v in source:
+    print('print', k, [v])
     if k in new_dict1:
+        # 이후 있는 곳에 값만 넣어주기
         new_dict1[k].append(v)
     else:
+        # 없으면 리스트 새로 생성
+        print(k, [v])
         new_dict1[k] = [v]
 
 print(new_dict1)
@@ -173,3 +177,58 @@ for k, v in source:
     new_dict2.setdefault(k, []).append(v)
 
 print(new_dict2)
+
+# 주의
+new_dict3 = {k: v for k, v in source}
+print(new_dict3) # 안돼용
+
+# dict 및 set 추가
+
+# immutanle Dict
+
+from types import MappingProxyType
+
+d = {'key1': 'value1'}
+
+# Read Only
+d_frozen = MappingProxyType(d)
+
+print(d, id(d))
+print(d_frozen, id(d_frozen))
+
+
+# 수정 가능
+d['key2'] = 'value2'
+
+print(d)
+
+# 수정 불가능
+# d_frozen['key2'] = 'value2'
+#
+# print(d_frozen)
+
+
+# set
+s1 = {'apple', 'orange', 'apple', 'orange', 'kiwi'}
+s2 = set(['apple', 'orange', 'apple', 'orange', 'kiwi'])
+s3 ={3}
+s3 = set() # not {}
+s5 = frozenset({'apple', 'orange', 'apple', 'orange', 'kiwi'})
+
+# s1.add('melon')
+# print(s1)
+
+# 선언 최적화
+# 바이트코드실행 -> i파이썬 인터프리터 실행
+from dis import dis
+
+print('--------')
+print(dis('{10}'))
+
+# 지능형 집합 (comprehending set)
+
+print('-----')
+
+from unicodedata import name
+
+print({name(chr(i), '') for i in range(0, 256)})
